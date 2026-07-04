@@ -1,0 +1,62 @@
+---
+import DashedBorder from './DashedBorder.astro';
+
+interface Props {
+	slug: string;
+	title: string;
+	blurb: string;
+	orientation: 'portrait' | 'landscape';
+	accent: 'accent' | 'project-1' | 'project-2' | 'project-3' | 'project-4';
+}
+
+const { slug, title, blurb, orientation, accent } = Astro.props;
+---
+
+<a class={`project-card project-card--${orientation}`} href={`/projects/${slug}`} style={`--card-accent: var(--color-${accent})`}>
+	<span class="project-card__image" aria-hidden="true">
+		<DashedBorder />
+	</span>
+	<span class="project-card__title">{title}</span>
+	<span class="project-card__blurb">{blurb}</span>
+</a>
+
+<style>
+	.project-card {
+		display: block;
+		break-inside: avoid;
+		margin-bottom: 2rem;
+		padding: 0.75rem;
+		border: 1px solid var(--card-accent);
+		border-radius: var(--radius-control);
+		text-decoration: none;
+		color: var(--color-text);
+	}
+
+	.project-card__image {
+		position: relative;
+		display: block;
+		width: 100%;
+		margin-bottom: 0.75rem;
+		background: var(--color-bg);
+	}
+
+	.project-card--portrait .project-card__image {
+		aspect-ratio: 4 / 5;
+	}
+
+	.project-card--landscape .project-card__image {
+		aspect-ratio: 3 / 2;
+	}
+
+	.project-card__title {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.25rem;
+	}
+
+	.project-card__blurb {
+		display: block;
+		font-size: 0.875rem;
+		color: var(--card-accent);
+	}
+</style>

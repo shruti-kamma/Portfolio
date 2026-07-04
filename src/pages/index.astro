@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MountainArt from '../components/MountainArt.astro';
+import SunArt from '../components/SunArt.astro';
+import DashedBorder from '../components/DashedBorder.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { RESUME_URL } from '../data/links';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Shruti Kamma — Portfolio">
+	<div class="site-container">
+		<section class="hero-frame">
+			<DashedBorder />
+
+			<div class="hero__sun">
+				<SunArt />
+			</div>
+
+			<div class="hero__mountains">
+				<MountainArt />
+			</div>
+
+			<div class="hero__content">
+				<h1 class="hero__headline">Good design feels obvious — getting there rarely is.</h1>
+
+				<div class="hero__intro">
+					<p class="hero__greeting">
+						<span class="hero__pitch">Hey! I'm Shruti — </span><br />
+						Half <span class="accent">Color</span>, Half Code, <br />
+						Completely Human.
+					</p>
+					<p class="hero__pitch">I'm looking for my first design internship!</p>
+					<a class="resume-btn" href={RESUME_URL} target="_blank" rel="noreferrer">Resume</a>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div class="site-container">
+		<section class="projects">
+			<p class="projects__intro">
+				I like learning hands-on. Here are a few projects I've worked on and what I've learned along the way…
+			</p>
+			<div class="projects__grid">
+				{
+					projects.map((project) => (
+						<ProjectCard
+							slug={project.id}
+							title={project.data.title}
+							blurb={project.data.blurb}
+							orientation={project.data.orientation}
+							accent={project.data.accent}
+						/>
+					))
+				}
+			</div>
+		</section>
+	</div>
+</BaseLayout>
+
+<style>
+	.hero-frame {
+		position: relative;
+		overflow: visible;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-bottom: 5rem;
+		padding: clamp(1.5rem, 4vw, 3rem);
+		min-height: clamp(380px, 42vw, 480px);
+	}
+
+	.hero__content {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(2rem, 5vw, 3.5rem);
+		width: 100%;
+		max-width: 800px;
+		margin-inline: auto;
+	}
+
+	.hero__sun {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: clamp(200px, 27vw, 320px);
+		pointer-events: none;
+		/* shifts the art so the red shape's clipped corner (not the SVG's own
+		   edge) lands on the frame corner — a ratio of the art, scale-invariant */
+		transform: translate(13.55%, -27.68%);
+	}
+
+	.hero__mountains {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: clamp(387px, 43vw, 581px);
+		pointer-events: none;
+		/* shifts the art so the blue rect's bottom-left corner (not the SVG's
+		   own edge) lands on the frame corner — same scale-invariant ratio trick */
+		transform: translate(-14.02%, 35.75%);
+	}
+
+	.hero__headline {
+		max-width: 28ch;
+		font-size: 2rem;
+		font-weight: 500;
+		line-height: 1.25;
+		margin: 0;
+	}
+
+	.hero__intro {
+		max-width: 320px;
+		margin-left: auto;
+	}
+
+	.hero__greeting {
+		font-size: 1rem;
+		line-height: 1.5;
+		margin: 0 0 1rem;
+	}
+
+	.accent {
+		color: var(--color-accent);
+	}
+
+	.hero__pitch {
+		font-size: 1rem;
+		font-weight: 600;
+		margin: 0 0 1.25rem;
+	}
+
+	.resume-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		margin-inline: auto;
+		padding: 0.6rem 1.5rem;
+		border: 1px solid var(--color-accent);
+		border-radius: var(--radius-control);
+		font-weight: 500;
+		text-decoration: none;
+		color: var(--color-text);
+	}
+
+	.projects {
+		margin-block: 5rem;
+	}
+
+	.projects__intro {
+		max-width: 40ch;
+		font-size: 1.1rem;
+		margin: 0 0 2rem;
+	}
+
+	.projects__grid {
+		columns: 2;
+		column-gap: 2rem;
+	}
+
+	@media (max-width: 640px) {
+		.projects__grid {
+			columns: 1;
+		}
+	}
+</style>

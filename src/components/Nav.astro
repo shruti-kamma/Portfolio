@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import portfolioWordmark from '../assets/logos/portfolio-wordmark.svg';
+---
+
+<header class="nav site-container">
+	<a href="/" class="nav__logo">
+		<Image src={portfolioWordmark} alt="Portfolio" width={76} height={32} />
+	</a>
+</header>
+
+<style>
+	.nav {
+		display: flex;
+		align-items: center;
+		height: 60px;
+	}
+
+	.nav__logo {
+		display: inline-flex;
+	}
+</style>

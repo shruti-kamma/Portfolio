@@ -1,0 +1,69 @@
+@import '@fontsource-variable/gabarito';
+
+:root {
+	/* palette */
+	--color-bg: #f8f9f8;
+	--color-text: #000000;
+	--color-green: #7b9647;
+	--color-red: #a5301c;
+	--color-yellow: #db9b1d;
+	--color-blue: #53769c;
+	--color-purple: #b09cc3;
+
+	/* semantic aliases */
+	--color-accent: var(--color-green);
+	--color-project-1: var(--color-red);
+	--color-project-2: var(--color-yellow);
+	--color-project-3: var(--color-blue);
+	--color-project-4: var(--color-purple);
+
+	/* type */
+	--font-body: 'Gabarito Variable', 'Gabarito', sans-serif;
+
+	/* recurring sketch-frame motif */
+	--frame-border: 1px dashed var(--color-text);
+	--radius-control: 8px;
+
+	/* layout */
+	--content-max-width: 1280px;
+	--content-gutter: clamp(1.25rem, 5vw, 3rem);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-family: var(--font-body);
+	font-optical-sizing: auto;
+}
+
+img,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+a {
+	color: inherit;
+}
+
+button {
+	font-family: inherit;
+}
+
+.site-container {
+	max-width: var(--content-max-width);
+	margin-inline: auto;
+	padding-inline: var(--content-gutter);
+}
