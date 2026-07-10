@@ -1,0 +1,96 @@
+---
+interface Outcome {
+	shape: 'triangle-up' | 'circle' | 'triangle-down';
+	label: string;
+}
+
+interface Props {
+	outcomes: Outcome[];
+}
+
+const { outcomes } = Astro.props;
+---
+
+<div class="key-outcomes">
+	{
+		outcomes.map((outcome, i) => (
+			<>
+				{i === 1 && <p class="key-outcomes__heading">Key Outcomes</p>}
+				<div class="key-outcomes__shape">
+					{outcome.shape === 'circle' && (
+						<svg viewBox="0 0 100 100" aria-hidden="true">
+							<circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 5" />
+						</svg>
+					)}
+					{outcome.shape === 'triangle-up' && (
+						<svg viewBox="0 0 100 90" aria-hidden="true">
+							<polygon
+								points="50,5 95,85 5,85"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1"
+								stroke-dasharray="5 5"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					)}
+					{outcome.shape === 'triangle-down' && (
+						<svg viewBox="0 0 100 90" aria-hidden="true">
+							<polygon
+								points="5,5 95,5 50,85"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1"
+								stroke-dasharray="5 5"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					)}
+					<span class="key-outcomes__label">{outcome.label}</span>
+				</div>
+			</>
+		))
+	}
+</div>
+
+<style>
+	.key-outcomes {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 2rem;
+		margin-block: 3rem;
+	}
+
+	.key-outcomes__heading {
+		margin: 0;
+		font-size: 1.1rem;
+		font-weight: 500;
+		white-space: nowrap;
+	}
+
+	.key-outcomes__shape {
+		position: relative;
+		width: clamp(80px, 8vw, 120px);
+		color: var(--color-text);
+	}
+
+	.key-outcomes__shape svg {
+		display: block;
+		width: 100%;
+		height: auto;
+		overflow: visible;
+	}
+
+	.key-outcomes__label {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 1rem;
+		text-align: center;
+		font-size: 0.7rem;
+		font-weight: 600;
+	}
+</style>

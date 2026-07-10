@@ -1,0 +1,70 @@
+---
+import FramedImage from './FramedImage.astro';
+
+interface Props {
+	number: number;
+	problem: string;
+	description: string;
+	image?: string;
+	imageSide: 'left' | 'right';
+}
+
+const { number, problem, description, image, imageSide } = Astro.props;
+---
+
+<div class={`process-step process-step--image-${imageSide}`}>
+	<div class="process-step__image">
+		<FramedImage src={image} alt={problem}>
+			<span class="process-step__number">{number}.</span>
+		</FramedImage>
+	</div>
+	<div class="process-step__text">
+		<p class="process-step__problem">{problem}:</p>
+		<p class="process-step__description">{description}</p>
+	</div>
+</div>
+
+<style>
+	.process-step {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+		align-items: center;
+		margin-bottom: 3rem;
+	}
+
+	.process-step__image {
+		order: 1;
+		aspect-ratio: 1;
+	}
+
+	.process-step__text {
+		order: 2;
+	}
+
+	.process-step--image-right .process-step__image {
+		order: 2;
+	}
+
+	.process-step--image-right .process-step__text {
+		order: 1;
+	}
+
+	.process-step__number {
+		position: absolute;
+		right: 1rem;
+		bottom: 0.75rem;
+		z-index: 1;
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+
+	.process-step__problem {
+		margin: 0 0 0.5rem;
+		font-weight: 600;
+	}
+
+	.process-step__description {
+		margin: 0;
+	}
+</style>

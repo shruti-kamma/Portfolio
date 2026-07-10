@@ -1,0 +1,125 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectHero from '../../components/ProjectHero.astro';
+import ProjectMeta from '../../components/ProjectMeta.astro';
+import KeyOutcomes from '../../components/KeyOutcomes.astro';
+import ProcessStep from '../../components/ProcessStep.astro';
+import Learnings from '../../components/Learnings.astro';
+import FramedImage from '../../components/FramedImage.astro';
+import ToolIcons from '../../components/ToolIcons.astro';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({
+		params: { slug: project.id },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { title, accent, heroImage, context, scope, duration, role, tools, outcomes, process, finalDesignImage, learnings } = project.data;
+---
+
+<BaseLayout title={`${title} — Shruti Kamma`}>
+	<div class="site-container">
+		<article class="project-detail" style={`--card-accent: var(--color-${accent})`}>
+			<a class="project-detail__back" href="/">← Back to projects</a>
+
+			<ProjectHero title={title} image={heroImage} />
+
+			<ProjectMeta context={context} scope={scope} duration={duration} role={role} tools={tools} />
+
+			<KeyOutcomes outcomes={outcomes} />
+
+			<div class="project-detail__divider">
+				<span>The Process</span>
+			</div>
+
+			{
+				process.map((step, i) => (
+					<ProcessStep
+						number={i + 1}
+						problem={step.problem}
+						description={step.description}
+						image={step.image}
+						imageSide={i % 2 === 0 ? 'left' : 'right'}
+					/>
+				))
+			}
+
+			<div class="project-detail__divider"></div>
+
+			<section class="project-detail__final">
+				<div class="project-detail__final-header">
+					<h2>Final Design</h2>
+					<ToolIcons tools={tools} />
+				</div>
+				<div class="project-detail__final-image">
+					<FramedImage src={finalDesignImage} alt={`${title} final design`} />
+				</div>
+			</section>
+
+			<Learnings learnings={learnings} />
+		</article>
+	</div>
+</BaseLayout>
+
+<style>
+	.project-detail {
+		margin-block: 3rem 5rem;
+	}
+
+	.project-detail__back {
+		display: inline-block;
+		margin-bottom: 2rem;
+		font-size: 0.9rem;
+		text-decoration: none;
+		color: var(--color-text);
+	}
+
+	.project-detail__divider {
+		position: relative;
+		margin-block: 3rem;
+		padding-top: 1px;
+		text-align: center;
+	}
+
+	.project-detail__divider::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		border-top: var(--frame-border);
+	}
+
+	.project-detail__divider span {
+		position: relative;
+		display: inline-block;
+		padding-inline: 1rem;
+		background: var(--color-bg);
+		font-weight: 500;
+	}
+
+	.project-detail__final {
+		margin-bottom: 3rem;
+	}
+
+	.project-detail__final-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1rem;
+	}
+
+	.project-detail__final-header h2 {
+		margin: 0;
+		font-size: 1.5rem;
+		font-weight: 500;
+	}
+
+	.project-detail__final-image {
+		aspect-ratio: 16 / 9;
+	}
+</style>

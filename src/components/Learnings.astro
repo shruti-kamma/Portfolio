@@ -1,0 +1,74 @@
+---
+interface Props {
+	learnings: string[];
+}
+
+const { learnings } = Astro.props;
+---
+
+<div class="learnings">
+	<div class="learnings__circle">
+		<svg viewBox="0 0 200 200" aria-hidden="true">
+			<circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 5" />
+		</svg>
+		<span class="learnings__label">Learnings</span>
+	</div>
+
+	<ol class="learnings__list">
+		{learnings.map((item) => <li>{item}</li>)}
+	</ol>
+</div>
+
+<style>
+	.learnings {
+		display: flex;
+		align-items: center;
+		gap: 3rem;
+		margin-block: 3rem 5rem;
+	}
+
+	.learnings__circle {
+		position: relative;
+		flex: 0 0 clamp(140px, 15vw, 180px);
+		color: var(--color-text);
+	}
+
+	.learnings__circle svg {
+		display: block;
+		width: 100%;
+		height: auto;
+		overflow: visible;
+	}
+
+	.learnings__label {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 500;
+	}
+
+	.learnings__list {
+		flex: 1;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		counter-reset: learnings;
+	}
+
+	.learnings__list li {
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
+		margin-bottom: 0.75rem;
+		padding-bottom: 0.5rem;
+		border-bottom: var(--frame-border);
+		counter-increment: learnings;
+	}
+
+	.learnings__list li::before {
+		content: counter(learnings) '.';
+		font-weight: 600;
+	}
+</style>

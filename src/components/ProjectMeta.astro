@@ -1,0 +1,76 @@
+---
+import ToolIcons from './ToolIcons.astro';
+
+interface Props {
+	context: string;
+	scope: string;
+	duration: string;
+	role: string;
+	tools: Array<'figma' | 'github'>;
+}
+
+const { context, scope, duration, role, tools } = Astro.props;
+---
+
+<section class="project-meta">
+	<p class="project-meta__context">{context}</p>
+
+	<dl class="project-meta__facts">
+		<div class="project-meta__row">
+			<dt>Scope:</dt>
+			<dd>{scope}</dd>
+		</div>
+		<div class="project-meta__row">
+			<dt>Duration:</dt>
+			<dd>{duration}</dd>
+		</div>
+		<div class="project-meta__row">
+			<dt>Role:</dt>
+			<dd>{role}</dd>
+		</div>
+		<div class="project-meta__row">
+			<dt>Tools:</dt>
+			<dd><ToolIcons tools={tools} /></dd>
+		</div>
+	</dl>
+</section>
+
+<style>
+	.project-meta {
+		display: flex;
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	.project-meta__context {
+		flex: 1;
+		max-width: 45ch;
+		margin: 0;
+	}
+
+	.project-meta__facts {
+		flex: 0 0 auto;
+		margin: 0;
+		padding-left: 2rem;
+		border-left: 1px solid var(--color-text);
+	}
+
+	.project-meta__row {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.project-meta__row:last-child {
+		margin-bottom: 0;
+	}
+
+	.project-meta__row dt {
+		font-weight: 600;
+	}
+
+	.project-meta__row dd {
+		margin: 0;
+	}
+</style>

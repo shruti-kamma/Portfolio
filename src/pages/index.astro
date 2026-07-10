@@ -5,6 +5,7 @@ import MountainArt from '../components/MountainArt.astro';
 import SunArt from '../components/SunArt.astro';
 import DashedBorder from '../components/DashedBorder.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import Button from '../components/Button.astro';
 import { RESUME_URL } from '../data/links';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
@@ -29,11 +30,13 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 				<div class="hero__intro">
 					<p class="hero__greeting">
 						<span class="hero__pitch">Hey! I'm Shruti — </span><br />
-						Half <span class="accent">Color</span>, Half Code, <br />
+						Half <span class="accent">Color</span>, Half <span font-family="Arial">Code</span>, <br />
 						Completely Human.
 					</p>
 					<p class="hero__pitch">I'm looking for my first design internship!</p>
-					<a class="resume-btn" href={RESUME_URL} target="_blank" rel="noreferrer">Resume</a>
+					<div class="hero__resume-wrap">
+						<Button href={RESUME_URL}>Resume</Button>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -41,9 +44,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
 	<div class="site-container">
 		<section class="projects">
-			<p class="projects__intro">
-				I like learning hands-on. Here are a few projects I've worked on and what I've learned along the way…
-			</p>
 			<div class="projects__grid">
 				{
 					projects.map((project) => (
@@ -133,28 +133,13 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 		margin: 0 0 1.25rem;
 	}
 
-	.resume-btn {
+	.hero__resume-wrap {
 		display: flex;
-		align-items: center;
 		justify-content: center;
-		width: fit-content;
-		margin-inline: auto;
-		padding: 0.6rem 1.5rem;
-		border: 1px solid var(--color-accent);
-		border-radius: var(--radius-control);
-		font-weight: 500;
-		text-decoration: none;
-		color: var(--color-text);
 	}
 
 	.projects {
 		margin-block: 5rem;
-	}
-
-	.projects__intro {
-		max-width: 40ch;
-		font-size: 1.1rem;
-		margin: 0 0 2rem;
 	}
 
 	.projects__grid {

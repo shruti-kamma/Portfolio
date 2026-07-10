@@ -1,0 +1,33 @@
+---
+import FramedImage from './FramedImage.astro';
+
+interface Props {
+	title: string;
+	image?: string;
+}
+
+const { title, image } = Astro.props;
+---
+
+<div class="project-hero">
+	<FramedImage src={image} alt={title}>
+		<h1 class="project-hero__title">{title}</h1>
+	</FramedImage>
+</div>
+
+<style>
+	.project-hero {
+		aspect-ratio: 16 / 10;
+		margin-bottom: 2rem;
+	}
+
+	.project-hero__title {
+		position: absolute;
+		left: 1.5rem;
+		bottom: 1.5rem;
+		z-index: 1;
+		margin: 0;
+		font-size: 2rem;
+		font-weight: 600;
+	}
+</style>
