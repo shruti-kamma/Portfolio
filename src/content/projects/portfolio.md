@@ -1,10 +1,10 @@
 ---
 title: Portfolio
 blurb: You're looking at it!
-orientation: portrait
+orientation: landscape
 accent: accent
 tags: [Placeholder]
-order: 2
+order: 5
 context: Placeholder context about the project, client/users, and my role.
 scope: Placeholder scope
 duration: Placeholder duration
@@ -12,11 +12,11 @@ role: Placeholder role
 tools: [figma, github]
 outcomes:
   - shape: triangle-up
-    label: Placeholder outcome 1
+    label: 000 Stat
   - shape: circle
-    label: Placeholder outcome 2
+    label: 000 Stat
   - shape: triangle-down
-    label: Placeholder outcome 3
+    label: 000 Stat
 process:
   - problem: 'Problem 1'
     description: Placeholder — research, options, decisions, iterations, obstacles navigated.

@@ -10,14 +10,14 @@ const { title, image } = Astro.props;
 ---
 
 <div class="project-hero">
-	<FramedImage src={image} alt={title}>
+	<FramedImage src={image} alt={title} solid>
 		<h1 class="project-hero__title">{title}</h1>
 	</FramedImage>
 </div>
 
 <style>
 	.project-hero {
-		aspect-ratio: 16 / 10;
+		height: calc(100vh - 120px);
 		margin-bottom: 2rem;
 	}
 
@@ -27,7 +27,9 @@ const { title, image } = Astro.props;
 		bottom: 1.5rem;
 		z-index: 1;
 		margin: 0;
-		font-size: 2rem;
-		font-weight: 600;
+		font-size: 2.25rem;
+		font-weight: 500;
+		line-height: 1;
+		color: #f8f9f8;
 	}
 </style>

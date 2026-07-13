@@ -1,0 +1,36 @@
+---
+interface Props {
+	nextSlug: string;
+	nextTitle: string;
+	nextAccent: 'accent' | 'project-1' | 'project-2' | 'project-3' | 'project-4';
+}
+
+const { nextSlug, nextTitle, nextAccent } = Astro.props;
+---
+
+<nav class="project-nav">
+	<a class="project-nav__pill" href="/" style="--pill-accent: var(--color-text)">← Back to home</a>
+	<a class="project-nav__pill" href={`/projects/${nextSlug}`} style={`--pill-accent: var(--color-${nextAccent})`}>
+		Next project: {nextTitle} →
+	</a>
+</nav>
+
+<style>
+	.project-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.project-nav__pill {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.75rem 1.25rem;
+		border: 1px solid var(--pill-accent, var(--card-accent));
+		border-radius: var(--radius-control);
+		font-weight: 600;
+		text-decoration: none;
+		color: var(--color-text);
+	}
+</style>

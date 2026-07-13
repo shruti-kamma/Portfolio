@@ -28,7 +28,7 @@ const { context, scope, duration, role, tools } = Astro.props;
 			<dt>Role:</dt>
 			<dd>{role}</dd>
 		</div>
-		<div class="project-meta__row">
+		<div class="project-meta__row project-meta__row--tools">
 			<dt>Tools:</dt>
 			<dd><ToolIcons tools={tools} /></dd>
 		</div>
@@ -37,33 +37,40 @@ const { context, scope, duration, role, tools } = Astro.props;
 
 <style>
 	.project-meta {
-		display: flex;
+		display: grid;
+		grid-template-columns: 2fr 1fr;
 		gap: 2rem;
+		padding: 1.5rem;
 		margin-bottom: 3rem;
 	}
 
 	.project-meta__context {
-		flex: 1;
-		max-width: 45ch;
 		margin: 0;
+		font-size: 1rem;
 	}
 
 	.project-meta__facts {
-		flex: 0 0 auto;
 		margin: 0;
 		padding-left: 2rem;
 		border-left: 1px solid var(--color-text);
+		font-size: 1rem;
 	}
 
 	.project-meta__row {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		margin-bottom: 0.5rem;
+		margin-bottom: 1.5rem;
 	}
 
 	.project-meta__row:last-child {
 		margin-bottom: 0;
+	}
+
+	.project-meta__row--tools {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
 	}
 
 	.project-meta__row dt {

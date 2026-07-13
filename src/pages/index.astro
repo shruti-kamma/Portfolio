@@ -14,8 +14,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 <BaseLayout title="Shruti Kamma — Portfolio">
 	<div class="site-container">
 		<section class="hero-frame">
-			<DashedBorder />
-
 			<div class="hero__sun">
 				<SunArt />
 			</div>
@@ -23,6 +21,8 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 			<div class="hero__mountains">
 				<MountainArt />
 			</div>
+
+			<DashedBorder />
 
 			<div class="hero__content">
 				<h1 class="hero__headline">Good design feels obvious — getting there rarely is.</h1>
