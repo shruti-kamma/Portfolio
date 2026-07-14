@@ -1,5 +1,5 @@
 ---
-import DashedBorder from './DashedBorder.astro';
+import FramedImage from './FramedImage.astro';
 
 interface Props {
 	slug: string;
@@ -14,7 +14,7 @@ const { slug, title, blurb, orientation, accent } = Astro.props;
 
 <a class={`project-card project-card--${orientation}`} href={`/projects/${slug}`} style={`--card-accent: var(--color-${accent})`}>
 	<span class="project-card__image" aria-hidden="true">
-		<DashedBorder />
+		<FramedImage solid />
 	</span>
 	<span class="project-card__title">{title}</span>
 	<span class="project-card__blurb">{blurb}</span>
@@ -25,9 +25,6 @@ const { slug, title, blurb, orientation, accent } = Astro.props;
 		display: block;
 		break-inside: avoid;
 		margin-bottom: 2rem;
-		padding: 0.75rem;
-		border: 1px solid var(--card-accent);
-		border-radius: var(--radius-control);
 		text-decoration: none;
 		color: var(--color-text);
 	}
@@ -37,7 +34,6 @@ const { slug, title, blurb, orientation, accent } = Astro.props;
 		display: block;
 		width: 100%;
 		margin-bottom: 0.75rem;
-		background: var(--color-bg);
 	}
 
 	.project-card--portrait .project-card__image {

@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionDivider from '../../components/SectionDivider.astro';
+import Finding from '../../components/Finding.astro';
+
+export async function getStaticPaths() {
+	const audits = await getCollection('audits');
+	return audits.map((audit) => ({
+		params: { slug: audit.id },
+		props: { audit },
+	}));
+}
+
+const { audit } = Astro.props;
+const { title, blurb, date, version, findings, summary } = audit.data;
+---
+
+<BaseLayout title={`${title} Audit — Shruti Kamma`}>
+	<div class="site-container">
+		<article class="audit-detail">
+			<header class="audit-detail__header">
+				<h1>{title}</h1>
+				<p class="audit-detail__blurb">{blurb}</p>
+				<p class="audit-detail__meta">
+					Date: {date} · Version: {version}
+				</p>
+			</header>
+
+			<SectionDivider label="Findings" />
+
+			<div class="audit-detail__findings">
+				{
+					findings.map((finding) => (
+						<Finding
+							title={finding.title}
+							category={finding.category}
+							wcag={finding.wcag}
+							note={finding.note}
+							image={finding.image}
+						/>
+					))
+				}
+			</div>
+
+			<SectionDivider label="Summary" />
+
+			<ul class="audit-detail__summary">
+				{summary.map((point) => <li>{point}</li>)}
+			</ul>
+
+			<a class="audit-detail__back" href="/">← Back to home</a>
+		</article>
+	</div>
+</BaseLayout>
+
+<style>
+	.audit-detail {
+		margin-block: 3rem 5rem;
+	}
+
+	.audit-detail__header h1 {
+		margin: 0 0 0.5rem;
+		font-size: 2.25rem;
+		font-weight: 500;
+	}
+
+	.audit-detail__blurb {
+		margin: 0 0 0.5rem;
+		font-size: 1rem;
+		color: var(--color-accent);
+	}
+
+	.audit-detail__meta {
+		margin: 0;
+		font-size: 0.9rem;
+	}
+
+	.audit-detail__summary {
+		margin: 0 0 3rem;
+		padding-left: 1.25rem;
+	}
+
+	.audit-detail__summary li {
+		margin-bottom: 0.75rem;
+	}
+
+	.audit-detail__back {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.75rem 1.25rem;
+		border: 1px solid var(--color-text);
+		border-radius: var(--radius-control);
+		font-weight: 600;
+		text-decoration: none;
+		color: var(--color-text);
+	}
+</style>

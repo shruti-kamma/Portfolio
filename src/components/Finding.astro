@@ -1,0 +1,74 @@
+---
+import FramedImage from './FramedImage.astro';
+
+interface Props {
+	title: string;
+	category: string;
+	wcag?: string;
+	note?: string;
+	image?: string;
+}
+
+const { title, category, wcag, note, image } = Astro.props;
+---
+
+<div class="finding">
+	<p class="finding__category">{category}</p>
+	<p class="finding__title">{title}</p>
+	{wcag && <p class="finding__wcag">{wcag}</p>}
+	{note && <p class="finding__note">{note}</p>}
+	{
+		image && (
+			<div class="finding__image">
+				<FramedImage src={image} alt={title} />
+			</div>
+		)
+	}
+</div>
+
+<style>
+	.finding {
+		padding-block: 1.25rem;
+		border-bottom: var(--frame-border);
+	}
+
+	.finding:last-child {
+		border-bottom: none;
+	}
+
+	.finding__category {
+		margin: 0 0 0.5rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-accent);
+	}
+
+	.finding__title {
+		margin: 0 0 0.5rem;
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+
+	.finding__wcag {
+		display: inline-block;
+		margin: 0 0 0.5rem;
+		padding: 0.25rem 0.75rem;
+		border: 1px solid var(--color-text);
+		border-radius: var(--radius-control);
+		font-size: 0.8rem;
+	}
+
+	.finding__note {
+		margin: 0;
+	}
+
+	.finding__image {
+		position: relative;
+		width: 100%;
+		max-width: 400px;
+		aspect-ratio: 16 / 9;
+		margin-top: 1rem;
+	}
+</style>

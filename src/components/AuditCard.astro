@@ -1,0 +1,52 @@
+---
+import FramedImage from './FramedImage.astro';
+
+interface Props {
+	slug: string;
+	title: string;
+	blurb: string;
+}
+
+const { slug, title, blurb } = Astro.props;
+---
+
+<a class="audit-card" href={`/audits/${slug}`}>
+	<span class="audit-card__image" aria-hidden="true">
+		<FramedImage />
+	</span>
+	<span class="audit-card__title">{title}</span>
+	<span class="audit-card__blurb">{blurb}</span>
+</a>
+
+<style>
+	.audit-card {
+		display: block;
+		break-inside: avoid;
+		margin-bottom: 2rem;
+		padding: 0.75rem;
+		border: 1px solid var(--color-accent);
+		border-radius: var(--radius-control);
+		text-decoration: none;
+		color: var(--color-text);
+	}
+
+	.audit-card__image {
+		position: relative;
+		display: block;
+		width: 100%;
+		aspect-ratio: 3 / 2;
+		margin-bottom: 0.75rem;
+	}
+
+	.audit-card__title {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.25rem;
+	}
+
+	.audit-card__blurb {
+		display: block;
+		font-size: 0.875rem;
+		color: var(--color-accent);
+	}
+</style>

@@ -45,4 +45,48 @@ const projects = defineCollection({
 	}),
 });
 
-export const collections = { projects };
+const findingCategory = z.enum([
+	'Information Architecture',
+	'Navigation',
+	'Forms & Interaction',
+	'Design & Layout',
+	'Mobile & Responsiveness',
+	'Legal & Compliance',
+	'Trust & Credibility',
+]);
+
+const finding = z.object({
+	title: z.string(),
+	category: findingCategory,
+	wcag: z.string().optional(),
+	note: z.string().optional(),
+	image: z.string().optional(),
+});
+
+const audits = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/audits' }),
+	schema: z.object({
+		title: z.string(),
+		blurb: z.string(),
+		order: z.number(),
+		date: z.string(),
+		version: z.string(),
+		findings: z.array(finding),
+		summary: z.array(z.string()),
+	}),
+});
+
+const certifications = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/certifications' }),
+	schema: z.object({
+		title: z.string(),
+		issuer: z.string(),
+		date: z.string(),
+		courseCount: z.string().optional(),
+		verifyUrl: z.string().optional(),
+		image: z.string().optional(),
+		order: z.number(),
+	}),
+});
+
+export const collections = { projects, audits, certifications };

@@ -5,10 +5,14 @@ import MountainArt from '../components/MountainArt.astro';
 import SunArt from '../components/SunArt.astro';
 import DashedBorder from '../components/DashedBorder.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import AuditCard from '../components/AuditCard.astro';
+import CertificationCard from '../components/CertificationCard.astro';
 import Button from '../components/Button.astro';
 import { RESUME_URL } from '../data/links';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const audits = (await getCollection('audits')).sort((a, b) => a.data.order - b.data.order);
+const certifications = (await getCollection('certifications')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title="Shruti Kamma — Portfolio">
@@ -44,6 +48,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
 	<div class="site-container">
 		<section class="projects">
+			<p class="projects__intro">Here are a few projects I've worked on and what I learnt along the way.</p>
 			<div class="projects__grid">
 				{
 					projects.map((project) => (
@@ -59,6 +64,39 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 			</div>
 		</section>
 	</div>
+
+	<div class="site-container">
+		<section class="audits">
+			<p class="audits__intro">Usability and accessibility audits I've conducted on real, live products.</p>
+			<div class="audits__grid">
+				{
+					audits.map((audit) => (
+						<AuditCard slug={audit.id} title={audit.data.title} blurb={audit.data.blurb} />
+					))
+				}
+			</div>
+		</section>
+	</div>
+
+	<div class="site-container">
+		<section class="certifications">
+			<p class="certifications__intro">Alongside building, I made sure to study the fundamentals properly.</p>
+			<div class="certifications__grid">
+				{
+					certifications.map((cert) => (
+						<CertificationCard
+							title={cert.data.title}
+							issuer={cert.data.issuer}
+							date={cert.data.date}
+							courseCount={cert.data.courseCount}
+							verifyUrl={cert.data.verifyUrl}
+							image={cert.data.image}
+						/>
+					))
+				}
+			</div>
+		</section>
+	</div>
 </BaseLayout>
 
 <style>
@@ -68,7 +106,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		margin-bottom: 5rem;
+		margin-bottom: 8rem;
 		padding: clamp(1.5rem, 4vw, 3rem);
 		min-height: clamp(380px, 42vw, 480px);
 	}
@@ -142,13 +180,51 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 		margin-block: 5rem;
 	}
 
+	.projects__intro {
+		max-width: 40ch;
+		font-size: 1.1rem;
+		margin: 0 0 2rem;
+	}
+
 	.projects__grid {
 		columns: 2;
 		column-gap: 2rem;
 	}
 
+	.audits {
+		margin-block: 5rem;
+	}
+
+	.audits__intro {
+		max-width: 40ch;
+		font-size: 1.1rem;
+		margin: 0 0 2rem;
+	}
+
+	.audits__grid {
+		columns: 2;
+		column-gap: 2rem;
+	}
+
+	.certifications {
+		margin-block: 5rem;
+	}
+
+	.certifications__intro {
+		max-width: 40ch;
+		font-size: 1.1rem;
+		margin: 0 0 2rem;
+	}
+
+	.certifications__grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+	}
+
 	@media (max-width: 640px) {
-		.projects__grid {
+		.projects__grid,
+		.audits__grid {
 			columns: 1;
 		}
 	}
