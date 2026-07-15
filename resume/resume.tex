@@ -1,0 +1,87 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{lmodern} % clean, professional serif; works with plain pdfLaTeX, no compiler changes needed
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% ---- Section formatting: small caps heading, thin rule underneath ----
+\titleformat{\section}{\normalsize\scshape}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{16pt}{8pt}
+
+% ---- Tight, consistent list style for bullet points ----
+\setlist[itemize]{leftmargin=14pt, itemsep=0pt, topsep=1pt, parsep=0pt}
+
+\newcommand{\role}[4]{%
+	\noindent\textbf{#1} \hfill #2\\
+	\textit{#3} \hfill \textit{#4}
+}
+
+\begin{document}
+
+% ============ HEADER ============
+\begin{center}
+	{\LARGE \textbf{Shruti Kamma}}\\[4pt]
+	[City, State] \quad $\cdot$ \quad [email@example.com] \quad $\cdot$ \quad [phone number]\\
+	\href{https://your-portfolio-url.example}{your-portfolio-url.example} \quad $\cdot$ \quad
+	\href{https://linkedin.com/in/your-handle}{linkedin.com/in/your-handle} \quad $\cdot$ \quad
+	\href{https://github.com/your-handle}{github.com/your-handle}
+\end{center}
+
+% ============ SUMMARY (optional — delete if you'd rather let projects speak for themselves) ============
+\section*{Summary}
+[One or two lines: who you are, what you're looking for, and the intersection of design and development you bring. e.g. "Product designer with front-end development experience, seeking a design internship. Comfortable owning a problem from user research through to a shipped, coded interface."]
+
+% ============ EDUCATION ============
+\section*{Education}
+\role{[University / Institution Name]}{[Expected Graduation Month Year]}{[Degree, Major]}{[City, State]}
+\begin{itemize}
+	\item{} [Relevant coursework, GPA if strong, honors, or leave this bullet out entirely]
+\end{itemize}
+
+% ============ PROJECTS ============
+\section*{Projects}
+
+\role{Vivaha}{[Month Year -- Month Year]}{[One-line role/description]}{}
+\begin{itemize}
+	\item{} [What the project was, who it was for, and your specific role]
+	\item{} [A concrete outcome or metric, if you have one]
+\end{itemize}
+
+\role{Leximind}{[Month Year -- Month Year]}{[One-line role/description]}{}
+\begin{itemize}
+	\item{} [What the project was, who it was for, and your specific role]
+\end{itemize}
+
+\role{CareerCraft}{[Month Year -- Month Year]}{[One-line role/description]}{}
+\begin{itemize}
+	\item{} [What the project was, who it was for, and your specific role]
+\end{itemize}
+
+% ============ AUDITS (optional — you already have two real, real-product audits; worth keeping in) ============
+\section*{Independent Audits}
+\role{Usability \& Accessibility Audit --- CyArmorHub}{[Month Year]}{Informally requested by the project team}{}
+\begin{itemize}
+	\item Conducted a WCAG-referenced audit across information architecture, navigation, and forms; findings prioritized and delivered as a structured report.
+\end{itemize}
+
+\role{Usability \& Accessibility Audit --- SkaleChat}{[Month Year]}{Informally requested by the project team}{}
+\begin{itemize}
+	\item{} [Same shape as above --- one line on scope/impact]
+\end{itemize}
+
+% ============ SKILLS ============
+\section*{Skills}
+\textbf{Design:} Figma, [wireframing / prototyping / user research / whatever's true] \\
+\textbf{Development:} HTML, CSS, JavaScript/TypeScript, Astro, [Git, whatever else applies] \\
+\textbf{Other:} [WCAG/accessibility, whatever rounds this out]
+
+% ============ CERTIFICATIONS ============
+\section*{Certifications}
+Google UX Design Professional Certificate --- Google (Coursera), [Month Year]
+
+\end{document}
