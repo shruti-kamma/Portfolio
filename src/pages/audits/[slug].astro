@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionDivider from '../../components/SectionDivider.astro';
 import Finding from '../../components/Finding.astro';
+import Button from '../../components/Button.astro';
 
 export async function getStaticPaths() {
 	const audits = await getCollection('audits');
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { audit } = Astro.props;
-const { title, blurb, date, version, findings, summary } = audit.data;
+const { title, blurb, date, version, reportUrl, findings, summary } = audit.data;
 ---
 
 <BaseLayout title={`${title} Audit — Shruti Kamma`} description={blurb}>
@@ -25,6 +26,13 @@ const { title, blurb, date, version, findings, summary } = audit.data;
 				<p class="audit-detail__meta">
 					Date: {date} · Version: {version}
 				</p>
+				{
+					reportUrl && (
+						<div class="audit-detail__report">
+							<Button href={reportUrl}>Download full report (PDF)</Button>
+						</div>
+					)
+				}
 			</header>
 
 			<SectionDivider label="Findings" />
@@ -37,7 +45,7 @@ const { title, blurb, date, version, findings, summary } = audit.data;
 							category={finding.category}
 							wcag={finding.wcag}
 							note={finding.note}
-							image={finding.image}
+							images={finding.images}
 						/>
 					))
 				}
@@ -74,6 +82,10 @@ const { title, blurb, date, version, findings, summary } = audit.data;
 	.audit-detail__meta {
 		margin: 0;
 		font-size: 0.9rem;
+	}
+
+	.audit-detail__report {
+		margin-top: 1.25rem;
 	}
 
 	.audit-detail__summary {

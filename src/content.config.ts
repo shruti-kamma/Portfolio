@@ -60,7 +60,7 @@ const finding = z.object({
 	category: findingCategory,
 	wcag: z.string().optional(),
 	note: z.string().optional(),
-	image: z.string().optional(),
+	images: z.array(z.string()).optional(),
 });
 
 const audits = defineCollection({
@@ -71,6 +71,7 @@ const audits = defineCollection({
 		order: z.number(),
 		date: z.string(),
 		version: z.string(),
+		reportUrl: z.string().optional(),
 		findings: z.array(finding),
 		summary: z.array(z.string()),
 	}),
