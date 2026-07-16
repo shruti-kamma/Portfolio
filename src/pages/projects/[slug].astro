@@ -20,10 +20,10 @@ export async function getStaticPaths() {
 }
 
 const { project, next } = Astro.props;
-const { title, accent, heroImage, context, scope, duration, role, tools, outcomes, process, finalDesignImage, learnings } = project.data;
+const { title, blurb, accent, heroImage, context, scope, duration, role, tools, outcomes, process, finalDesignImage, learnings } = project.data;
 ---
 
-<BaseLayout title={`${title} — Shruti Kamma`}>
+<BaseLayout title={`${title} — Shruti Kamma`} description={blurb}>
 	<div class="site-container">
 		<article class="project-detail" style={`--card-accent: var(--color-${accent})`}>
 			<ProjectHero title={title} image={heroImage} />

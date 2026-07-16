@@ -91,6 +91,7 @@ const certifications = (await getCollection('certifications')).sort((a, b) => a.
 							courseCount={cert.data.courseCount}
 							verifyUrl={cert.data.verifyUrl}
 							image={cert.data.image}
+							imagePosition={cert.data.imagePosition}
 						/>
 					))
 				}

@@ -16,7 +16,7 @@ const { audit } = Astro.props;
 const { title, blurb, date, version, findings, summary } = audit.data;
 ---
 
-<BaseLayout title={`${title} Audit — Shruti Kamma`}>
+<BaseLayout title={`${title} Audit — Shruti Kamma`} description={blurb}>
 	<div class="site-container">
 		<article class="audit-detail">
 			<header class="audit-detail__header">

@@ -85,6 +85,7 @@ const certifications = defineCollection({
 		courseCount: z.string().optional(),
 		verifyUrl: z.string().optional(),
 		image: z.string().optional(),
+		imagePosition: z.string().optional(),
 		order: z.number(),
 	}),
 });

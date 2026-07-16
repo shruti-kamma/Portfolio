@@ -6,9 +6,10 @@ interface Props {
 	courseCount?: string;
 	verifyUrl?: string;
 	image?: string;
+	imagePosition?: string;
 }
 
-const { title, issuer, date, courseCount, verifyUrl, image } = Astro.props;
+const { title, issuer, date, courseCount, verifyUrl, image, imagePosition = '50% 50%' } = Astro.props;
 const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 ---
 
@@ -16,7 +17,7 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 	{
 		image ? (
 			<button type="button" class="cert-card__image" aria-label={`View full ${title} certificate`} data-cert-trigger={dialogId}>
-				<img src={image} alt="" class="cert-card__image-img" />
+				<img src={image} alt="" class="cert-card__image-img" style={`object-position: ${imagePosition}`} />
 				<span class="cert-card__image-overlay" aria-hidden="true" />
 				<span class="cert-card__image-zoom" aria-hidden="true">
 					<svg viewBox="0 0 24 24" width="16" height="16">
@@ -74,7 +75,7 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 		position: relative;
 		display: block;
 		flex: 0 0 clamp(140px, 32%, 220px);
-		aspect-ratio: 4 / 3;
+		aspect-ratio: 5 / 4;
 		padding: 0;
 		border: 1px solid var(--color-accent);
 		overflow: hidden;
@@ -88,6 +89,7 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		object-position: 0% 50%;
 	}
 
 	.cert-card__image-overlay {
