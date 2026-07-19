@@ -14,9 +14,9 @@ outcomes:
   - shape: triangle-up
     label: 9 platform modules redesigned
   - shape: circle
-    label: Adopted by KLH University
+    label: 3,000 students across KL University
   - shape: triangle-down
-    label: 1 Month IA + UX overhaul
+    label: Adopted campus-wide
 process:
   - problem: Nine feature areas, no coherent structure
     description: CareerCraft had grown to span portfolios, resumes, a GitHub README editor, learning resources, AI mock interviews, weekly contests, placement support, and certificate verification — each useful on its own, but without an information architecture tying them together. Restructured the IA platform-wide so the path through the platform's core loop (learn, build, showcase, get placed) was legible instead of something users had to piece together themselves.
