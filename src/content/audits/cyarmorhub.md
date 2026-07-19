@@ -2,7 +2,7 @@
 title: CyArmorHub
 blurb: A usability and accessibility audit of a security compliance platform.
 order: 1
-date: 06/03/2026
+date: March 2026
 version: '10'
 reportUrl: /audits/cyarmorhub-report.pdf
 findings:

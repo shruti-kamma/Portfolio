@@ -2,7 +2,7 @@
 title: SkaleChat
 blurb: A usability and accessibility audit of a messaging app's onboarding and core flows.
 order: 2
-date: 03/07/2026
+date: July 2026
 version: '1'
 reportUrl: /audits/skalechat-report.pdf
 findings:
