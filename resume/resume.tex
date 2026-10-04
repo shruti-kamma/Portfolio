@@ -7,14 +7,21 @@
 \usepackage{lmodern} % clean, professional serif; works with plain pdfLaTeX, no compiler changes needed
 
 \pagestyle{empty}
+\frenchspacing
+\hyphenation{information including}
 \setlength{\parindent}{0pt}
 
 % ---- Section formatting: small caps heading, thin rule underneath ----
 \titleformat{\section}{\normalsize\scshape}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{12pt}{6pt}
+\titlespacing{\section}{0pt}{9pt}{5pt}
 
 % ---- Tight, consistent list style for bullet points ----
 \setlist[itemize]{leftmargin=14pt, itemsep=0pt, topsep=1pt, parsep=0pt}
+
+% one-line heading for entries with no location column: name --- role, date on the right
+\newcommand{\project}[3]{%
+	\noindent\textbf{#1} --- \textit{#2} \hfill #3
+}
 
 \newcommand{\role}[4]{%
 	\noindent\textbf{#1} \hfill #2\\
@@ -26,7 +33,7 @@
 % ============ HEADER ============
 \begin{center}
 	{\LARGE \textbf{Shruti Kamma}}\\[4pt]
-	Hyderabad, India \quad $\cdot$ \quad \href{mailto:shrutikamma@gmail.com}{shrutikamma@gmail.com} \quad $\cdot$ \quad +91 93926 76095\\
+	Hyderabad, India \quad $\cdot$ \quad \href{mailto:shruti.kamma@gmail.com}{shruti.kamma@gmail.com} \quad $\cdot$ \quad +91 93926 76095\\
 	\href{https://shruti-kamma-portfolio.netlify.app}{shruti-kamma-portfolio.netlify.app} \quad $\cdot$ \quad
 	\href{https://www.linkedin.com/in/shruti-kamma-71bb35312/}{linkedin.com/in/shruti-kamma} \quad $\cdot$ \quad
 	\href{https://github.com/shruti-kamma}{github.com/shruti-kamma}
@@ -34,51 +41,60 @@
 
 % ============ SUMMARY ============
 \section*{Summary}
-Computer Science undergraduate with a \textbf{design-and-development skill set}, seeking my first design internship. Comfortable owning a problem from \textbf{user research and information architecture} through to a \textbf{shipped, coded interface}.
+Computer Science undergraduate who \textbf{designs and builds}, taking a problem from user research and information architecture to a shipped, coded interface. Delivered two freelance products end to end, including an \textbf{accessibility-first platform for persons with disabilities}, and audited live products against WCAG. Seeking a first design internship on a team that cares about \textbf{inclusive design}.
 
 % ============ EDUCATION ============
 \section*{Education}
-\role{KL University}{Expected May 2027}{Bachelor of Technology (Honours), Computer Science and Engineering --- CGPA: 9.44}{Hyderabad, Telangana}
+\noindent\textbf{KL University}, Hyderabad \hfill Expected May 2027\\
+\textit{Bachelor of Technology (Honours), Computer Science and Engineering --- CGPA: 9.44}
+
+% ============ FREELANCE EXPERIENCE ============
+\section*{Freelance Experience}
+
+\role{\href{https://blackbox.org.in}{Blackbox Global Foundation} --- \href{https://blackbox.org.in}{\normalfont blackbox.org.in}}{Jul 2026 -- Present}{Product Designer \& Full-Stack Developer}{Freelance}
+\begin{itemize}
+	\item Designed and built the Blackbox INDEX\texttrademark{} leaderboards and company dashboards, ranking Indian firms on disability inclusion, with a screen-reader equivalent for every chart (WCAG AA).
+	\item Designed its AI data pipeline: crawled 1,239 regulatory filings from 413 companies, sent only relevant pages to the model, and traced every score to its source page on a 10-metric framework.
+\end{itemize}
+
+\role{\href{https://charrishtravels.com}{Charrish Travels} --- \href{https://charrishtravels.com}{\normalfont charrishtravels.com}}{Aug 2026 -- Sep 2026}{End-to-End Designer \& Developer}{Freelance}
+\begin{itemize}
+	\item Drawing on customer input from the client, designed a mobile-first site around enquiry instead of a booking engine to suit custom itineraries: WhatsApp on every page and pre-filled tour enquiries.
+	\item Structured tour pages around the client's real packages (trip facts, day-by-day timeline, temple and overnight stops) and built a tool that turns a pasted itinerary into a published page.
+\end{itemize}
 
 % ============ PROJECTS ============
-\section*{Projects}
+\section*{Selected Projects}
 
-\role{CareerCraft}{March 2026}{UX/UI Designer}{}
+\project{CareerCraft}{UX/UI Designer}{Mar 2026}
 \begin{itemize}
-	\item Restructured the information architecture and led a complete UX redesign across 9 platform modules --- now used by 3,000+ students across all KL University campuses.
+	\item Ran user research, then restructured the information architecture and led a full UX redesign across 9 platform modules, now used by 3,000+ KL University students.
 \end{itemize}
 
-\role{Vivaha}{June 2026 -- Present}{Product Designer \& Full-Stack Developer}{}
+\project{Vivaha}{Product Designer \& Full-Stack Developer}{Jun 2026 -- Present}
 \begin{itemize}
-	\item Designed and built the Discover matching feed for a trust-network matrimonial app --- trust-distance visualization, connector-path modal, shared avatar/header components, and a two-tier profile visibility model.
+	\item Designed and built the Discover feed for a trust-network matrimonial app: trust-distance visualisation, connector-path modal, shared components, and a two-tier profile privacy model.
 \end{itemize}
 
-\role{Git Analyser}{July 2026 -- Present}{UI Designer \& Front-End Developer}{}
-\begin{itemize}
-	\item Redesigned the React frontend around GitHub's Primer design system, adding dark mode and fixing token-driven UI bugs (1,311+ lines, 30 files, open PR to main).
-\end{itemize}
-
-% ============ AUDITS (optional — you already have two real, real-product audits; worth keeping in) ============
+% ============ AUDITS ============
 \section*{Independent Audits}
-\role{Usability \& Accessibility Audit --- CyArmorHub}{March 2026}{Informally requested by the project team}{}
+\textit{Usability \& accessibility audits of live products, requested by each team and delivered as reports.}
 \begin{itemize}
-	\item Conducted a 20-finding WCAG-referenced audit across information architecture, navigation, and forms; delivered as a structured report.
-\end{itemize}
-
-\role{Usability \& Accessibility Audit --- SkaleChat}{July 2026}{Informally requested by the project team}{}
-\begin{itemize}
-	\item Conducted a 33-finding WCAG-referenced audit surfacing blocking onboarding bugs and Legal \& Compliance gaps; delivered as a structured report.
+	\item \textbf{CyArmorHub} (Mar 2026): 20 WCAG-referenced findings across IA, navigation, and forms.
+	\item \textbf{SkaleChat} (Jul 2026): 33 WCAG-referenced findings, incl. blocking onboarding bugs and legal gaps.
 \end{itemize}
 
 % ============ SKILLS ============
 \section*{Skills}
-\textbf{Design:} Figma, Wireframing, Prototyping, Information Architecture, Design Systems \\
-\textbf{Development:} HTML, CSS, JavaScript/TypeScript, React, React Native, Astro, Git \\
-\textbf{Other:} WCAG/Accessibility Auditing, Usability Testing
+{\raggedright
+\textbf{Design Tools \& Methods:} Figma, User Research, Wireframing, Prototyping, Information Architecture, Usability Testing, Accessibility (WCAG) Auditing, Design Systems \\
+\textbf{Development:} HTML/CSS, JavaScript/TypeScript, React, React Native, Next.js, Astro, Tailwind, Git\par}
 
 % ============ CERTIFICATIONS ============
 \section*{Certifications}
-Google UX Design Professional Certificate --- Google (Coursera), May 2026 \\
-Claude Code 101 --- Anthropic, July 2026
+\begin{itemize}
+	\item Google UX Design Professional Certificate --- Google (Coursera), May 2026
+	\item Claude Code 101 --- Anthropic, Jul 2026
+\end{itemize}
 
 \end{document}
