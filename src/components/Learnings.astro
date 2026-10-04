@@ -6,22 +6,21 @@ interface Props {
 const { learnings } = Astro.props;
 ---
 
-<div class="learnings">
-	<div class="learnings__circle">
-		<svg viewBox="0 0 200 200" aria-hidden="true">
-			<circle
-				cx="100"
-				cy="100"
-				r="95"
+<section class="learnings" aria-labelledby="learnings-heading">
+	<div class="learnings__shape">
+		<svg viewBox="0 0 100 100" aria-hidden="true">
+			<polygon
+				points="50,5 95,95 5,95"
 				fill="none"
 				stroke="currentColor"
 				stroke-width="1"
-				stroke-dasharray="4.974 4.974"
+				stroke-dasharray="5.022 5.022"
 				stroke-linecap="round"
+				stroke-linejoin="round"
 				vector-effect="non-scaling-stroke"
 			/>
 		</svg>
-		<span class="learnings__label">Learnings</span>
+		<h2 class="learnings__label" id="learnings-heading">Learnings</h2>
 	</div>
 
 	<ol class="learnings__list">
@@ -45,7 +44,7 @@ const { learnings } = Astro.props;
 			))
 		}
 	</ol>
-</div>
+</section>
 
 <style>
 	.learnings {
@@ -53,16 +52,16 @@ const { learnings } = Astro.props;
 		justify-content: center;
 		align-items: center;
 		gap: 3rem;
-		margin-block: 3rem 5rem;
+		margin-block: 4rem 6rem;
 	}
 
-	.learnings__circle {
+	.learnings__shape {
 		position: relative;
 		flex: 0 0 clamp(140px, 15vw, 180px);
 		color: var(--color-text);
 	}
 
-	.learnings__circle svg {
+	.learnings__shape svg {
 		display: block;
 		width: 100%;
 		height: auto;
@@ -73,13 +72,18 @@ const { learnings } = Astro.props;
 		position: absolute;
 		inset: 0;
 		display: flex;
-		align-items: center;
+		/* sit in the wide lower part of the triangle, not its geometric middle */
+		align-items: flex-end;
 		justify-content: center;
+		padding-bottom: 18%;
+		margin: 0;
+		font-size: 1rem;
 		font-weight: 500;
 	}
 
 	.learnings__list {
-		flex: 0 0 27.5rem;
+		flex: 0 1 48rem;
+		min-width: 0;
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -111,5 +115,22 @@ const { learnings } = Astro.props;
 		overflow: visible;
 		pointer-events: none;
 		color: var(--color-text);
+	}
+
+	@media (max-width: 640px) {
+		.learnings {
+			flex-direction: column;
+			gap: 2rem;
+		}
+
+		.learnings__shape {
+			flex: none;
+			width: 160px;
+		}
+
+		.learnings__list {
+			flex-basis: auto;
+			width: 100%;
+		}
 	}
 </style>

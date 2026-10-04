@@ -1,20 +1,57 @@
 ---
+import { siAstro, siClaude, siNetlify, siNextdotjs, siPython, siSupabase, siTailwindcss, siTypescript } from 'simple-icons';
+import type { Tool } from '../data/projects';
+
 interface Props {
-	tools: Array<'figma' | 'github'>;
+	tools: Tool[];
 }
 
 const { tools } = Astro.props;
 
-const ICON_BG: Record<string, string> = {
+const LABEL: Record<Tool, string> = {
+	figma: 'Figma',
+	github: 'GitHub',
+	astro: 'Astro',
+	tailwind: 'Tailwind CSS',
+	netlify: 'Netlify',
+	supabase: 'Supabase',
+	nextjs: 'Next.js',
+	typescript: 'TypeScript',
+	python: 'Python',
+	claude: 'Claude',
+};
+
+const ICON_BG: Record<Tool, string> = {
 	figma: '#1e1e1e',
 	github: '#181717',
+	astro: '#17191e',
+	tailwind: '#0f172a',
+	netlify: '#0e1e25',
+	supabase: '#1c1c1c',
+	nextjs: '#000000',
+	typescript: '#3178c6',
+	python: '#1e1e1e',
+	claude: '#1e1e1e',
+};
+
+// brand marks from simple-icons, drawn in each brand's own colour
+const SIMPLE_ICONS: Partial<Record<Tool, { path: string; hex: string }>> = {
+	astro: { path: siAstro.path, hex: '#ffffff' },
+	tailwind: siTailwindcss,
+	netlify: siNetlify,
+	supabase: siSupabase,
+	nextjs: { path: siNextdotjs.path, hex: '#ffffff' },
+	typescript: { path: siTypescript.path, hex: '#ffffff' },
+	python: { path: siPython.path, hex: '#ffd43b' },
+	claude: siClaude,
 };
 ---
 
 <ul class="tool-icons">
 	{
 		tools.map((tool) => (
-			<li class="tool-icons__item" style={`background: ${ICON_BG[tool]}`} title={tool}>
+			<li class="tool-icons__item" style={`background: ${ICON_BG[tool]}`} title={LABEL[tool]}>
+				<span class="visually-hidden">{LABEL[tool]}</span>
 				{tool === 'figma' && (
 					<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
 						<path fill="#F24E1E" d="M8 24a4 4 0 0 0 4-4v-4H8a4 4 0 0 0 0 8Z" />
@@ -32,6 +69,11 @@ const ICON_BG: Record<string, string> = {
 						/>
 					</svg>
 				)}
+				{SIMPLE_ICONS[tool] && (
+					<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+						<path fill={SIMPLE_ICONS[tool].hex.replace(/^#?/, '#')} d={SIMPLE_ICONS[tool].path} />
+					</svg>
+				)}
 			</li>
 		))
 	}
@@ -40,6 +82,7 @@ const ICON_BG: Record<string, string> = {
 <style>
 	.tool-icons {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 0.5rem;
 		margin: 0;
 		padding: 0;

@@ -1,14 +1,16 @@
 ---
+import type { Accent } from '../data/projects';
+
 interface Props {
 	nextSlug: string;
 	nextTitle: string;
-	nextAccent: 'accent' | 'project-1' | 'project-2' | 'project-3' | 'project-4';
+	nextAccent: Accent;
 }
 
 const { nextSlug, nextTitle, nextAccent } = Astro.props;
 ---
 
-<nav class="project-nav">
+<nav class="project-nav" aria-label="Project navigation">
 	<a class="project-nav__pill" href="/" style="--pill-accent: var(--color-text)">← Back to home</a>
 	<a class="project-nav__pill" href={`/projects/${nextSlug}`} style={`--pill-accent: var(--color-${nextAccent})`}>
 		Next project: {nextTitle} →
@@ -19,6 +21,7 @@ const { nextSlug, nextTitle, nextAccent } = Astro.props;
 	.project-nav {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		gap: 1rem;
 	}

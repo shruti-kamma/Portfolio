@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 import DashedBorder from './DashedBorder.astro';
 
 interface Props {
@@ -6,7 +8,7 @@ interface Props {
 	category: string;
 	wcag?: string;
 	note?: string;
-	images?: string[];
+	images?: ImageMetadata[];
 }
 
 const { title, category, wcag, note, images } = Astro.props;
@@ -14,7 +16,7 @@ const { title, category, wcag, note, images } = Astro.props;
 
 <div class="finding">
 	<p class="finding__category">{category}</p>
-	<p class="finding__title">{title}</p>
+	<h3 class="finding__title">{title}</h3>
 	{wcag && <p class="finding__wcag">{wcag}</p>}
 	{note && <p class="finding__note">{note}</p>}
 	{
@@ -23,7 +25,12 @@ const { title, category, wcag, note, images } = Astro.props;
 				{images.map((image) => (
 					<span class="finding__image">
 						<DashedBorder />
-						<img src={image} alt={title} />
+						<Image
+							src={image}
+							alt={`Screenshot: ${title}`}
+							widths={[400, 800, 1200].filter((w) => w <= image.width)}
+							sizes="(max-width: 640px) 90vw, 600px"
+						/>
 					</span>
 				))}
 			</div>
@@ -47,7 +54,7 @@ const { title, category, wcag, note, images } = Astro.props;
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
-		color: var(--color-accent);
+		color: var(--color-accent-text);
 	}
 
 	.finding__title {

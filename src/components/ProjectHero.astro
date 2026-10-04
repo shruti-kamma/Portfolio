@@ -1,16 +1,17 @@
 ---
+import type { ImageMetadata } from 'astro';
 import FramedImage from './FramedImage.astro';
 
 interface Props {
 	title: string;
-	image?: string;
+	image?: ImageMetadata;
 }
 
 const { title, image } = Astro.props;
 ---
 
 <div class="project-hero">
-	<FramedImage src={image} alt={title} solid>
+	<FramedImage src={image} alt="" solid sizes="(max-width: 1280px) 100vw, 1184px" priority>
 		<h1 class="project-hero__title">{title}</h1>
 	</FramedImage>
 </div>
@@ -19,6 +20,17 @@ const { title, image } = Astro.props;
 	.project-hero {
 		height: calc(100vh - 120px);
 		margin-bottom: 2rem;
+	}
+
+	@media (max-width: 640px) {
+		.project-hero {
+			height: auto;
+			aspect-ratio: 4 / 5;
+		}
+
+		.project-hero__title {
+			font-size: 1.75rem;
+		}
 	}
 
 	.project-hero__title {
@@ -30,6 +42,6 @@ const { title, image } = Astro.props;
 		font-size: 2.25rem;
 		font-weight: 500;
 		line-height: 1;
-		color: #f8f9f8;
+		color: var(--card-accent-on);
 	}
 </style>

@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { accentVars, getSortedProjects } from '../../data/projects';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectHero from '../../components/ProjectHero.astro';
 import ProjectMeta from '../../components/ProjectMeta.astro';
@@ -10,9 +10,10 @@ import FramedImage from '../../components/FramedImage.astro';
 import ToolIcons from '../../components/ToolIcons.astro';
 import ProjectNav from '../../components/ProjectNav.astro';
 import SectionDivider from '../../components/SectionDivider.astro';
+import Button from '../../components/Button.astro';
 
 export async function getStaticPaths() {
-	const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+	const projects = await getSortedProjects();
 	return projects.map((project, i) => ({
 		params: { slug: project.id },
 		props: { project, next: projects[(i + 1) % projects.length] },
@@ -20,15 +21,15 @@ export async function getStaticPaths() {
 }
 
 const { project, next } = Astro.props;
-const { title, blurb, accent, heroImage, context, scope, duration, role, tools, outcomes, process, finalDesignImage, learnings } = project.data;
+const { title, blurb, accent, heroImage, context, scope, duration, role, liveUrl, tools, outcomes, process, finalDesignImage, learnings } = project.data;
 ---
 
 <BaseLayout title={`${title} — Shruti Kamma`} description={blurb}>
 	<div class="site-container">
-		<article class="project-detail" style={`--card-accent: var(--color-${accent})`}>
+		<article class="project-detail" style={accentVars(accent)}>
 			<ProjectHero title={title} image={heroImage} />
 
-			<ProjectMeta context={context} scope={scope} duration={duration} role={role} tools={tools} />
+			<ProjectMeta context={context} scope={scope} duration={duration} role={role} liveUrl={liveUrl} tools={tools} />
 
 			<KeyOutcomes outcomes={outcomes} />
 
@@ -51,10 +52,13 @@ const { title, blurb, accent, heroImage, context, scope, duration, role, tools, 
 			<section class="project-detail__final">
 				<div class="project-detail__final-header">
 					<h2>Final Design</h2>
-					<ToolIcons tools={tools} />
+					<div class="project-detail__final-actions">
+						{tools.includes('github') && <ToolIcons tools={['github']} />}
+						{liveUrl && <Button href={liveUrl}>Visit live site ↗</Button>}
+					</div>
 				</div>
 				<div class="project-detail__final-image">
-					<FramedImage src={finalDesignImage} alt={`${title} final design`} solid />
+					<FramedImage src={finalDesignImage} alt={`${title} final design`} solid sizes="(max-width: 1280px) 100vw, 1184px" />
 				</div>
 			</section>
 
@@ -79,6 +83,12 @@ const { title, blurb, accent, heroImage, context, scope, duration, role, tools, 
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 1rem;
+	}
+
+	.project-detail__final-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
 	}
 
 	.project-detail__final-header h2 {

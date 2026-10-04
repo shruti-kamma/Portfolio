@@ -1,20 +1,23 @@
 ---
+import type { ImageMetadata } from 'astro';
 import FramedImage from './FramedImage.astro';
+import { accentVars, type Accent } from '../data/projects';
 
 interface Props {
 	slug: string;
 	title: string;
 	blurb: string;
 	orientation: 'portrait' | 'landscape';
-	accent: 'accent' | 'project-1' | 'project-2' | 'project-3' | 'project-4';
+	accent: Accent;
+	image?: ImageMetadata;
 }
 
-const { slug, title, blurb, orientation, accent } = Astro.props;
+const { slug, title, blurb, orientation, accent, image } = Astro.props;
 ---
 
-<a class={`project-card project-card--${orientation}`} href={`/projects/${slug}`} style={`--card-accent: var(--color-${accent})`}>
+<a class={`project-card project-card--${orientation}`} href={`/projects/${slug}`} style={accentVars(accent)}>
 	<span class="project-card__image" aria-hidden="true">
-		<FramedImage solid />
+		<FramedImage src={image} solid sizes="(max-width: 640px) 100vw, 600px" />
 	</span>
 	<span class="project-card__title">{title}</span>
 	<span class="project-card__blurb">{blurb}</span>
@@ -53,6 +56,6 @@ const { slug, title, blurb, orientation, accent } = Astro.props;
 	.project-card__blurb {
 		display: block;
 		font-size: 0.875rem;
-		color: var(--card-accent);
+		color: var(--card-accent-text);
 	}
 </style>

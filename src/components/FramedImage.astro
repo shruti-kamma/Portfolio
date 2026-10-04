@@ -1,18 +1,35 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 import DashedBorder from './DashedBorder.astro';
 
 interface Props {
-	src?: string;
+	src?: ImageMetadata;
 	alt?: string;
 	solid?: boolean;
+	/** CSS `sizes` for the rendered slot, so the browser picks the smallest adequate width */
+	sizes?: string;
+	/** above-the-fold images (e.g. a page hero) load eagerly; everything else lazy */
+	priority?: boolean;
 }
 
-const { src, alt = '', solid = false } = Astro.props;
+const { src, alt = '', solid = false, sizes = '(max-width: 640px) 100vw, 640px', priority = false } = Astro.props;
 ---
 
 <span class={`framed-image ${solid && !src ? 'framed-image--solid' : ''}`}>
 	<DashedBorder />
-	{src && <img src={src} alt={alt} />}
+	{
+		src && (
+			<Image
+				src={src}
+				alt={alt}
+				widths={[480, 800, 1200, 1600, 2400].filter((w) => w <= src.width)}
+				sizes={sizes}
+				loading={priority ? 'eager' : 'lazy'}
+				fetchpriority={priority ? 'high' : undefined}
+			/>
+		)
+	}
 	<slot />
 </span>
 

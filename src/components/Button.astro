@@ -8,7 +8,7 @@ const { href, class: className } = Astro.props;
 ---
 
 <a class:list={['btn', className]} href={href} target="_blank" rel="noreferrer">
-	<slot />
+	<slot /><span class="visually-hidden"> (opens in a new tab)</span>
 </a>
 
 <style>

@@ -1,11 +1,14 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
 interface Props {
 	title: string;
 	issuer: string;
 	date: string;
 	courseCount?: string;
 	verifyUrl?: string;
-	image?: string;
+	image?: ImageMetadata;
 	imagePosition?: string;
 }
 
@@ -17,7 +20,14 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 	{
 		image ? (
 			<button type="button" class="cert-card__image" aria-label={`View full ${title} certificate`} data-cert-trigger={dialogId}>
-				<img src={image} alt="" class="cert-card__image-img" style={`object-position: ${imagePosition}`} />
+				<Image
+					src={image}
+					alt=""
+					class="cert-card__image-img"
+					style={`object-position: ${imagePosition}`}
+					widths={[240, 480]}
+					sizes="220px"
+				/>
 				<span class="cert-card__image-overlay" aria-hidden="true" />
 				<span class="cert-card__image-zoom" aria-hidden="true">
 					<svg viewBox="0 0 24 24" width="16" height="16">
@@ -37,13 +47,13 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 	</svg>
 
 	<div class="cert-card__body">
-		<p class="cert-card__title">{title}</p>
+		<h3 class="cert-card__title">{title}</h3>
 		<p class="cert-card__meta">{issuer} · {date}</p>
 		{courseCount && <p class="cert-card__courses">{courseCount}</p>}
 		{
 			verifyUrl && (
 				<a class="cert-card__verify" href={verifyUrl} target="_blank" rel="noreferrer">
-					Verify →
+					Verify<span class="visually-hidden"> {title} certificate (opens in a new tab)</span> →
 				</a>
 			)
 		}
@@ -52,11 +62,11 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
 {
 	image && (
-		<dialog id={dialogId} class="cert-dialog">
+		<dialog id={dialogId} class="cert-dialog" aria-label={`${title} certificate`}>
 			<button type="button" class="cert-dialog__close" data-cert-close={dialogId} aria-label="Close">
 				✕
 			</button>
-			<img src={image} alt={title} class="cert-dialog__image" />
+			<Image src={image} alt={`${title} certificate`} class="cert-dialog__image" width={Math.min(image.width, 1600)} />
 		</dialog>
 	)
 }
@@ -126,6 +136,7 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
 	.cert-card__title {
 		margin: 0 0 0.25rem;
+		font-size: 1rem;
 		font-weight: 600;
 	}
 
@@ -137,7 +148,7 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 	.cert-card__courses {
 		margin: 0.25rem 0 0;
 		font-size: 0.875rem;
-		color: var(--color-accent);
+		color: var(--color-accent-text);
 	}
 
 	.cert-card__verify {
@@ -146,7 +157,7 @@ const dialogId = `cert-preview-${title.replace(/\s+/g, '-').toLowerCase()}`;
 		font-weight: 600;
 		font-size: 0.9rem;
 		text-decoration: none;
-		color: var(--color-accent);
+		color: var(--color-accent-text);
 	}
 
 	.cert-dialog {

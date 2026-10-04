@@ -9,6 +9,7 @@
 	--color-yellow: #db9b1d;
 	--color-blue: #53769c;
 	--color-purple: #b09cc3;
+	--color-beige: #d9c4a0;
 
 	/* semantic aliases */
 	--color-accent: var(--color-green);
@@ -16,6 +17,25 @@
 	--color-project-2: var(--color-yellow);
 	--color-project-3: var(--color-blue);
 	--color-project-4: var(--color-purple);
+	--color-project-5: var(--color-beige);
+
+	/* text-safe shades: same hues darkened to clear WCAG AA (4.5:1) on --color-bg.
+	   The palette above stays for fills and borders; use these for coloured text. */
+	--color-accent-text: #637939;
+	--color-project-1-text: var(--color-red);
+	--color-project-2-text: #936813;
+	--color-project-3-text: #517399;
+	--color-project-4-text: #8464a1;
+	--color-project-5-text: #8a6c37;
+
+	/* text placed on top of a solid accent fill (hero titles, step numbers):
+	   light where the fill is dark enough, dark on the pale fills */
+	--color-accent-on: var(--color-bg);
+	--color-project-1-on: var(--color-bg);
+	--color-project-2-on: var(--color-text);
+	--color-project-3-on: var(--color-bg);
+	--color-project-4-on: var(--color-text);
+	--color-project-5-on: var(--color-text);
 
 	/* type */
 	--font-body: 'Gabarito Variable', 'Gabarito', sans-serif;
@@ -42,6 +62,9 @@ body {
 }
 
 body {
+	/* decorative hero art deliberately bleeds past its frame; never let it
+	   widen the page into a sideways scroll on narrow screens */
+	overflow-x: clip;
 	background: var(--color-bg);
 	color: var(--color-text);
 	font-family: var(--font-body);
@@ -56,6 +79,40 @@ svg {
 
 a {
 	color: inherit;
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-text);
+	outline-offset: 3px;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.skip-link {
+	position: absolute;
+	top: 0.5rem;
+	left: 0.5rem;
+	z-index: 100;
+	padding: 0.5rem 1rem;
+	border-radius: var(--radius-control);
+	background: var(--color-text);
+	color: var(--color-bg);
+	font-weight: 600;
+	transform: translateY(-200%);
+}
+
+.skip-link:focus {
+	transform: none;
 }
 
 button {
